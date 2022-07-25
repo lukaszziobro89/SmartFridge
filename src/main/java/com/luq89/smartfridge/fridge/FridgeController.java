@@ -31,7 +31,13 @@ public class FridgeController {
     public ResponseEntity<Fridge> createTutorial(@RequestBody Fridge fridge) {
         try {
             Fridge _fridge = service.createFridge(
-                    new Fridge(fridge.getProducerName(), fridge.getDoorType(), fridge.getFridgeName()));
+                    new Fridge(
+                            fridge.getProducerName(),
+                            fridge.getDoorType(),
+                            fridge.getFridgeName(),
+                            fridge.getFreezerCapacity(),
+                            fridge.getChillerCapacity()
+                    ));
             return new ResponseEntity<>(_fridge, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
