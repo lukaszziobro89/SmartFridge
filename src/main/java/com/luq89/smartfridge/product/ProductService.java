@@ -13,6 +13,8 @@ public class ProductService {
     @Autowired
     private FridgeRepository fridgeRepository;
 
+//    TODO: move @Autowired to
+
     public Product addProductToFridge(Product product){
         return productRepository.save(product);
     }

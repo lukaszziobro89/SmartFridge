@@ -19,6 +19,7 @@ public class ProductController {
     @Autowired
     private FridgeService fridgeService;
 
+//    TODO: move @Autowired to constructor
 
     @GetMapping("/add")
     public String displayFridgeForm(Model model){
