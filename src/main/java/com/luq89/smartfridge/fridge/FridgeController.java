@@ -2,38 +2,40 @@ package com.luq89.smartfridge.fridge;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
-@Controller
-@RequestMapping("/fridges")
+@CrossOrigin(origins = "http://localhost:4200")
+@RestController
+@RequestMapping("/api/fridges")
 public class FridgeController {
 
+    private final FridgeService service;
+
     @Autowired
-    private FridgeService service;
-
-    @GetMapping("/")
-    public String showAllFridges(Model model){
-        model.addAttribute("fridges", service.getAvailableFridges());
-        return "fridge/fridges";
+    public FridgeController(FridgeService service) {
+        this.service = service;
     }
 
-    @GetMapping("/add")
-    public String displayFridgeForm(Model model){
-        Fridge aFridge = new Fridge();
-        model.addAttribute("fridge", aFridge);
-        model.addAttribute("doorTypes", DoorType.values());
-        return "fridge/addFridge";
+    @GetMapping
+    public ResponseEntity<List<Fridge>> showAllFridges(){
+        List<Fridge> fridges = service.getAvailableFridges();
+        return new ResponseEntity<>(fridges, HttpStatus.OK);
     }
 
-    @PostMapping("/create")
-    public String createFridge(Fridge fridge){
-        service.createFridge(fridge);
-        log.info("Fridge with id: " + fridge.getId() + " fridge registered.");
-        return "redirect:/fridges/add";
+    @PostMapping("/add")
+    public ResponseEntity<Fridge> createTutorial(@RequestBody Fridge fridge) {
+        try {
+            Fridge _fridge = service.createFridge(
+                    new Fridge(fridge.getProducerName(), fridge.getDoorType(), fridge.getFridgeName()));
+            return new ResponseEntity<>(_fridge, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+    
 }
