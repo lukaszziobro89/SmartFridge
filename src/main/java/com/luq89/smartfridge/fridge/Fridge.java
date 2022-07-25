@@ -19,6 +19,8 @@ public class Fridge {
     @Enumerated(EnumType.STRING)
     private DoorType doorType;
     private String fridgeName;
+    private double freezerCapacity; //    TODO: validate > 0 and > minimum capacity
+    private double chillerCapacity; //    TODO: validate > 0 and > minimum capacity
 
     @OneToMany(mappedBy = "fridge", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Product> products;
@@ -31,9 +33,11 @@ public class Fridge {
         this.doorType = DoorType.valueOf(doorType);
     }
 
-    public Fridge(String producerName, DoorType doorType, String fridgeName) {
+    public Fridge(String producerName, DoorType doorType, String fridgeName, double freezerCapacity, double chillerCapacity) {
         this.producerName = producerName;
         this.doorType = doorType;
         this.fridgeName = fridgeName;
+        this.freezerCapacity = freezerCapacity;
+        this.chillerCapacity = chillerCapacity;
     }
 }
