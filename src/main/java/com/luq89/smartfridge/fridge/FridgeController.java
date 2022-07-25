@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// TODO: add logging
+
 @Slf4j
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
