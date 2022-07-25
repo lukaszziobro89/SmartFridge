@@ -1,5 +1,7 @@
 package com.luq89.smartfridge.fridge;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum DoorType {
 
     SIDE_BY_SIDE("Side by Side"),
@@ -7,6 +9,7 @@ public enum DoorType {
     BOTTOM_FREEZER("Bottom freezer"),
     FRENCH_DOOR("French door");
 
+    @JsonValue
     private final String displayName;
 
     DoorType(String displayName) {
