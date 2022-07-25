@@ -37,5 +37,5 @@ public class FridgeController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
 }
