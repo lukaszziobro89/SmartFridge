@@ -3,14 +3,19 @@ package com.luq89.smartfridge.fridge;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FridgeService {
 
+    private final FridgeRepository fridgeRepository;
 
     @Autowired
-    private FridgeRepository fridgeRepository;
+    public FridgeService(FridgeRepository fridgeRepository) {
+        this.fridgeRepository = fridgeRepository;
+    }
 
-    public Iterable<Fridge> getAvailableFridges() {
+    public List<Fridge> getAvailableFridges() {
         return fridgeRepository.findAll();
     }
 
