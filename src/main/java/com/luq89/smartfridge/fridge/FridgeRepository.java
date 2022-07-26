@@ -8,6 +8,4 @@ import java.util.List;
 @Repository
 public interface FridgeRepository extends JpaRepository<Fridge, Long> {
 
-    List<Fridge> findAll();
-
 }
