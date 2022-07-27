@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FridgeDTO {
 
+    private Long fridgeId;
     private String producerName;
     private DoorType doorType;
     private String fridgeName;
