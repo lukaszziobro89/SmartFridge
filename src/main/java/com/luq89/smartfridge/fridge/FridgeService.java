@@ -27,4 +27,8 @@ public class FridgeService {
     public Fridge createFridge(Fridge fridge) {
         return fridgeRepository.save(fridge);
     }
+
+    public void deleteById(Long fridgeId) {
+        fridgeRepository.deleteById(fridgeId);
+    }
 }
