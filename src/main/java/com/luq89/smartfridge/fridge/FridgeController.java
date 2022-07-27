@@ -17,18 +17,18 @@ import java.util.List;
 @RequestMapping("/api/fridges")
 public class FridgeController {
 
-    private final FridgeService service;
+    private final FridgeService fridgeService;
     private final ModelMapper modelMapper;
 
     @Autowired
     public FridgeController(FridgeService service, ModelMapper modelMapper) {
-        this.service = service;
+        this.fridgeService = service;
         this.modelMapper = modelMapper;
     }
 
     @GetMapping
     public ResponseEntity<List<FridgeDTO>> showAllFridges(){
-        List<Fridge> fridges = service.getAvailableFridges();
+        List<Fridge> fridges = fridgeService.getAvailableFridges();
         List<FridgeDTO> fridgeDTOList = fridges.stream()
                 .map(fridge -> modelMapper.map(fridge, FridgeDTO.class))
                 .toList();
@@ -39,9 +39,19 @@ public class FridgeController {
     public ResponseEntity<FridgeDTO> createTutorial(@RequestBody FridgeDTO fridgeDTO) {
         try {
             Fridge fridge = modelMapper.map(fridgeDTO, Fridge.class);
-            Fridge fridgeCreated = service.createFridge(fridge);
+            Fridge fridgeCreated = fridgeService.createFridge(fridge);
             FridgeDTO fridgeCreatedDTO = modelMapper.map(fridgeCreated, FridgeDTO.class);
             return new ResponseEntity<>(fridgeCreatedDTO, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Long> deleteFridge(@PathVariable Long id){
+        try {
+            fridgeService.deleteById(id);
+            return new ResponseEntity<>(id, HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
