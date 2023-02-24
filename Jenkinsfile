@@ -28,8 +28,6 @@ pipeline {
             steps {
                 sh """
                            echo "Building"
-                           echo "${BUILD_VERSION}"
-                           echo "${env.BUILD_VERSION}"
                            which java
                            whereis java
                            env | sort
