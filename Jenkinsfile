@@ -26,7 +26,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                env | sort
+                echo 'asd'
 //                 sh 'mvn -v'
             }
         }
