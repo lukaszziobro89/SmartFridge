@@ -9,11 +9,13 @@ pipeline {
         sh 'mvn clean package'
       }
     }
-  stage('SonarQube Analysis') {
-    def scannerHome = tool 'DPSonar';
-    withSonarQubeEnv() {
-      sh "${scannerHome}/bin/sonar-scanner"
+    stage('SonarQube Analysis') {
+      steps {
+        def scannerHome = tool 'DPSonar';
+        withSonarQubeEnv() {
+          sh "${scannerHome}/bin/sonar-scanner"
+        }
+      }
     }
-  }
   }
 }
