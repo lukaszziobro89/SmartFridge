@@ -26,7 +26,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "OK!"
                 mvn -v
             }
         }
