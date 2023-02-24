@@ -26,14 +26,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh '''
+                sh """
                            echo "Building"
                            echo "${BUILD_VERSION}"
                            echo "${env.BUILD_VERSION}"
                            which java
                            whereis java
                            env | sort
-                        '''
+                        """
                 
 //                 sh 'mvn -v'
             }
