@@ -26,11 +26,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                
+                dir("/var/lib/jenkins/workspace/SmartFridge-JAVA/") {
 //                 sh 'mvn -B -DskipTests clean package'
-                sh 'mvn -v'
-                
-            
+                    sh 'mvn -v'
+                }
             }
         }
      }
