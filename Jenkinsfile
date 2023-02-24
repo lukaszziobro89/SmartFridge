@@ -1,16 +1,19 @@
-node {
-  stage('SCM') {
-    checkout scm
+pipeline {
+  agent any
+  tools {
+    maven 'maven-3.6.3' 
   }
-  stage('Maven compile project'){
-    steps {
-      sh 'mvn clean package'
+  stages {
+    stage ('Maven compile project') {
+      steps {
+        sh 'mvn clean package'
+      }
     }
-  }
   stage('SonarQube Analysis') {
     def scannerHome = tool 'DPSonar';
     withSonarQubeEnv() {
       sh "${scannerHome}/bin/sonar-scanner"
     }
+  }
   }
 }
