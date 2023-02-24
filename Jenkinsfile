@@ -3,7 +3,7 @@ node {
     checkout scm
   }
   stage('Maven compile project'){
-    steps {
+    step {
       sh 'mvn clean package'
     }
   }
