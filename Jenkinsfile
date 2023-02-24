@@ -26,7 +26,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                which java
+                env | sort
 //                 sh 'mvn -v'
             }
         }
