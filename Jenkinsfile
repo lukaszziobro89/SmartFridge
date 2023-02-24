@@ -27,10 +27,11 @@ pipeline {
         stage('Build') {
             steps {
                 sh """
-                           echo "Building"
-                           which java
-                           whereis java
-                           env | sort
+                              mvn -v
+//                            echo "Building"
+//                            which java
+//                            whereis java
+//                            env | sort
                         """
                 
 //                 sh 'mvn -v'
