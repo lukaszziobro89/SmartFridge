@@ -28,7 +28,7 @@ pipeline {
             steps {
                 echo "OK!"
 //                     mvn -v
-                }
+//                 }
             }
         }
      }
