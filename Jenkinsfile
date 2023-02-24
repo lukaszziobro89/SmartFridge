@@ -26,7 +26,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                mvn -v
+                sh 'mvn -v'
             }
         }
      }
