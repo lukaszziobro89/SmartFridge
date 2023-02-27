@@ -12,11 +12,17 @@ pipeline {
                 sh """ mvn -v"""                
             }
         }
+//         stage('SonarQube Analysis') {
+//              def scannerHome = tool 'DPSonar';
+//              withSonarQubeEnv() {
+//             	 sh "${scannerHome}/bin/sonar-scanner"
+//         	}
+//         }
         stage('SonarQube Analysis') {
-             def scannerHome = tool 'DPSonar';
-             withSonarQubeEnv() {
-            	 sh "${scannerHome}/bin/sonar-scanner"
-        	}
-        }
+            def mvn = tool 'mvn-3.9.0';
+            withSonarQubeEnv() {
+              sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=Fridge"
+            }
+          }
      }
 }
