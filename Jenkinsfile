@@ -1,20 +1,3 @@
-// node {
-//   stage('SCM') {
-//     checkout scm
-//   }
-//   stage('Maven compile project'){
-//     step {
-//       sh 'mvn clean package'
-//     }
-//   }
-//   stage('SonarQube Analysis') {
-//     def scannerHome = tool 'DPSonar';
-//     withSonarQubeEnv() {
-//       sh "${scannerHome}/bin/sonar-scanner"
-//     }
-//   }
-// }
-
 pipeline {
     agent any
 
@@ -26,16 +9,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh """
-                              mvn -v
-//                            echo "Building"
-//                            which java
-//                            whereis java
-//                            env | sort
-                        """
-                
-//                 sh 'mvn -v'
+                sh """ mvn -v"""                
             }
+        }
+        stage('SonarQube Analysis') {
+             def scannerHome = tool 'DPSonar';
+             withSonarQubeEnv() {
+            	 sh "${scannerHome}/bin/sonar-scanner"
+        	}
         }
      }
 }
