@@ -8,11 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 // TODO: add logging
 
 @Slf4j
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api/fridges")
 public class FridgeController {
@@ -30,8 +31,7 @@ public class FridgeController {
     public ResponseEntity<List<FridgeDTO>> showAllFridges(){
         List<Fridge> fridges = fridgeService.getAvailableFridges();
         List<FridgeDTO> fridgeDTOList = fridges.stream()
-                .map(fridge -> modelMapper.map(fridge, FridgeDTO.class))
-                .toList();
+                .map(fridge -> modelMapper.map(fridge, FridgeDTO.class)).collect(Collectors.toList());
         return new ResponseEntity<>(fridgeDTOList, HttpStatus.OK);
     }
 
