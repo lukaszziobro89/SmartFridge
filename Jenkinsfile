@@ -25,8 +25,10 @@ pipeline {
 //         }
         stage('SonarQube Analysis') {
 //             def mvn = tool 'mvn-3.9.0';
-            withSonarQubeEnv() {
-              sh "/var/jenkins_home/tools/hudson.tasks.Maven_MavenInstallation/mvn-3.9.0/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=Fridge"
+            steps{
+                withSonarQubeEnv() {
+                  sh "/var/jenkins_home/tools/hudson.tasks.Maven_MavenInstallation/mvn-3.9.0/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=Fridge"
+                }
             }
         }
      }
