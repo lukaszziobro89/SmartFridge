@@ -8,6 +8,7 @@ class SmartFridgeApplicationTests {
 
     @Test
     void contextLoads() {
+        assert true;
     }
 
 }
